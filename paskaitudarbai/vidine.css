@@ -1,0 +1,12 @@
+body {
+ background-color: teal;
+display: inline-block;
+}
+.container {
+    text-align: center;
+    background-color: rgb(219, 138, 31);
+  width: 80%;
+  border: 15px solid burlywood;
+  padding: 50px;
+  margin-top: 40px;
+}

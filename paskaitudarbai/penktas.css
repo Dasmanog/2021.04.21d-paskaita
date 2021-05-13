@@ -1,0 +1,44 @@
+.hero-image {
+background-image: url(/paskaitudarbai/menulis.jpg);
+background-color: #cccccc;
+height: 100%;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+position: relative;
+}
+
+body{
+    width: 100%;
+    margin: 0;
+    text-align: justify;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px;
+}
+
+header {
+    text-align: center;
+
+}
+main>p:first-child {
+    
+  columns: 2 150px;
+  column-rule: 1px solid #999;
+  column-gap: 2rem;
+  border: 1px solid red;
+  padding: 1rem;
+}
+
+
+section {
+text-align: justify; 
+columns: 3 150px;
+ column-rule: 1px solid #999;
+ column-gap: 2rem;;
+ border: 1px solid blue;
+ padding: 1rem;
+}
+
+h2 {
+text-align: center;
+}

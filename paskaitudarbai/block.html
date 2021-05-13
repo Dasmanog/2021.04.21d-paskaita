@@ -1,0 +1,54 @@
+<!--Trečia paskaita(2021-04-21):
+Užduotis:
+1. Iš GitHub repositorijos pasiimti index.html kodą.
+2. Atlikti pakeitimus:
+  
+   2.3 Pakeisti svetainės struktūrą: visa svetainė turi susidėti iš 4 eilučių:
+       2.3.1 Pirmoje eilutėje stulpelis užimantis 100% eilutės.
+       2.3.2 Antroje eilutėje du stulpeliai užimantys po 50% eilutės.
+       2.3.3 Trečioje eilutėje du stulpeliai: vienas užima 70% eilutės, kitas 30%
+       2.3.4 Ketvirtoje eilutėje 3 vienodo pločio stulpeliai.
+   2.4. Ankstesnį svetainės turinį(nuotraukas, tekstą) gražiai sutalpinti į stulpelius savo nuožiūra.
+3. Suformatuoti h1 tag'a taip(išskyrus "Minimali struktura"): teksto dydis 48px, spalva - geltona.
+4. Suformatuoti visus p tagus: teksto dydis 12px, spalva - tamsiai pilka.
+5. Visos nuotraukos turi būti vienodo dydžio(pasirinkti savo nuožiūra)
+6. Panaikinti <ul> sąrašo simbolius.
+
+P.S. jei užduotis prastai atvaizduojama GitHube, peržvelkite šį paveikslėlį: http://prntscr.com/11sqt3c	-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kaip padaryti du elementus atskirais blokais esanciais vienas salia kito</title>
+    <link rel="stylesheet" href="/paskaitudarbai/block.css">
+</head>
+<body>
+    <div class="bodyclass">
+        <div class='row'>
+            <div class='col-33'> 
+                <h1 id='main-heading'>Minimali struktura</h1> <hr>
+            </div>
+        <div class='col-33'>
+            <!-- Eilute su stulpeliais  -->
+            <div class='row clearfix'>
+
+                <div class='col pirma'>
+                <p><img src="/paskaitudarbai/menulis.jpg" alt="menulis"></p><br>
+                <p><img src="/paskaitudarbai/marsas.jpg" alt="marsas"></p><br>
+                <p><img src="/paskaitudarbai/saule.jpg" alt="saule"></p><br>
+                <p><img src="/paskaitudarbai/zvaigzdes.jpg" alt="zvaigzdes"></p><br>
+                </div>
+
+                <div class='col antra'>
+                    <p><img src="/paskaitudarbai/tinklai.jpg" alt=""></p> 
+                    <p><img src="/paskaitudarbai/medis.jpg" alt=""></p> 
+                    <p><img src="/paskaitudarbai/malunai.jpg" alt=""></p> 
+                    <p><img src="/paskaitudarbai/upe.jpg" alt=""></p> 
+                    <p><img src="/paskaitudarbai/tinklai.jpg" alt=""></p>
+                </div>
+            </div>  
+    </div> 
+</body>
+</html>

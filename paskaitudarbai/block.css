@@ -1,0 +1,51 @@
+body {
+    max-width: 1920px;
+}
+
+.bodyclass {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+#main-heading {
+    text-align: center;
+    margin:auto;
+
+}
+
+img {
+    width:400px;
+}
+p {
+    color:darkgray;
+    font-size:12px;
+}
+
+
+.clearfix {
+    overflow: auto ;
+}
+
+#main-heading {
+    color:grey;
+    font-size: 20px;
+}
+
+.row {
+    background-color: aquamarine;
+    width: 100%;
+    color: grey;
+}
+.col {
+    float:left;
+    width: 50%;
+}
+
+.pirma {
+    background-color: blue;
+}
+
+.antra {
+    background-color: rgb(0, 255, 21);
+}

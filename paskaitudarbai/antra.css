@@ -1,0 +1,30 @@
+body {
+    display: inline-block;
+    margin-left: 25%;
+    background-color: rgb(159, 116, 197);
+}
+
+.container {
+    text-align: center;
+    background-color: rgb(230, 158, 66);
+  width: 80%;
+  border: 15px solid burlywood;
+  padding: 50px;
+  margin-top: 40px;
+}
+a {
+color: rgba(187, 187, 187, 0.788);
+text-decoration: none;
+}
+.vidines {
+color: rgb(171, 228, 209);
+}
+
+.isorines {
+ 
+ color: rgb(171, 228, 209);
+}
+
+.naujas {
+color: rgb(171, 228, 209);
+}
