@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerija</title>
+
+     <link rel="stylesheet" href="/css/bootstrap.min.css"> <!--bootstrapo integravimas -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script><!-- isotope bibliotekos integravimo nuoroda  -->
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+
+
+    <style>
+        img {
+             width: 100%; /*jeigu kazkoks elementas yra kitam elemente ir mes parasom kad jis butu 100proc, tai tas elementas uzima tevinio elemento 100%.  */
+            height: 250px;
+            object-fit: cover;
+        }
+
+         .grid-item:nth-child(odd) > img {
+             height: 500px;
+         } /* odd reiskia nelyginis */
+
+
+         .grid-gutter-sizer {
+             width: 0;
+         }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sort-by-button-group button-group">
+             <button class="btn btn-outline-primary" data-sort-value="title" data-sort-direction="asc">A-Z</button><!-- nurodau asc, kas reiskia ascending, didejancia tvarka rykiavimas;outline primary visi sie pavadinimai atkeliavo is dokumentacijos bootstrapo, kur yra stiliu bibliotekos, belieka skaityti dokumentacija ir susirasti norima pakeitima atlikti koda/taga.  -->
+             <button class="btn btn-primary" data-sort-value="title" data-sort-direction="desc">Z-A</button> <!--rykiavimas descending, reiskia mazejancia tvarka-->
+             <button class="btn btn-primary" data-sort-value="random" data-sort-direction="Random">Random</button>
+            </div>
+        <div class="row grid">
+            <div class="col-md-6 grid-sizer"></div> <!--musu nuotraukos uzims puse ekrano, tas reiskia md-6-->
+            <div class="grid-gutter-sizer"></div>
+        </div>
+
+     </div>
+    <script>
+
+
+    //salygos sakinys. 
+    // pagal tam tikra salyga mes galime keisti savo veiksmu seka. 
+    //apsirasom kintamaji.
+        // var skaicius = 9; 
+        // var tekstas = "";
+
+        //jeigu musu skaicius yra daugiau nei 8. 
+        //mes galim patikrinti ar musu kintamasis yra:
+        // daugiau >, 
+        //ar maziau < yra uz nurodyta kintamaji, 
+        //daugiau arba lygu >=, maziau arba lygu <=.
+        //ar jis lygus == (turi buti dvi lygybes!)
+        //ar jis nelygus !=
+
+        // if(tekstas == "") {
+        //     console.log("musu tekstas yra lygus tusciam");
+        // } else  {
+        //     console.log(tekstas);
+        // }   //else yra kitu atveju
+
+        // if(skaicius > 8) {//salygu galim rasyti kiek norim.
+        //     console.log("skaicius yra didesnis nei 8");
+        // }
+
+
+
+
+        // const konstanta = "3.141"; //kintamasis kuris nekinta
+
+        // let kintamasis; // tiek let tiek var yra tiesiog kintamojo aprasymas. let yra lokalesnis
+        // var kintamasis; //var yra globalesnis. 
+
+
+        // var zmogus = { //sitoj vietoj yra aprasytas objektas
+        //     "vardas": "vardenis", 
+        //     "pavarde": "Pavardenis",
+        //     "kodas": 97654,
+        //     "apibudinimas": ["aukstas", "turtingas", "nemoka siuti"]
+        // } ;
+
+        // var zmogus1 = {
+        //     "vardas": "vardenis1", 
+        //     "pavarde": "Pavardenis1",
+        //     "kodas": 97645,
+        //     "apibudinimas": ["zemas", "turtingas", "moka siuti"]
+        // } ;
+
+        // console.log(zmogus.vardas);
+        // console.log(zmogus1.pavarde);
+
+        // var grupe; // grupe yra tam tikras sarasas. Sarase kiekvienas zmogus turi savo eiles numeri. 
+
+        // grupe = [zmogus, zmogus1]; //sitoj vietoj yra sarasas, sarase kiekvienas zmogus turi savo eiles numeri, eiles numeris yra rasomas lauztiniuose skliaustuose, o saraso numeris yra ciklo kintamasis (i), kuris kiekviena karta sukasi ir pakeicia savo reiksme. saraso numeris ir atributas, t.y. vardas. 
+
+        // for(var i = 0; i < grupe.length; i++ ) {
+        //     console.log(grupe[i].vardas) //is json objektu masyvo, kuris yra grupe, isvedam,kiekvieno musu objekto, t,y, zmogaus varda. 
+
+        // }
+        // console.log(grupe);
+
+        // var x = 1;
+
+        // var masyvas; //masyvo objektas; dar kitaip json masyvas.
+
+        // var informacija = "";
+          
+        // masyvas = { 
+        //     "image1": "https://images.unsplash.com/photo-1585399000684-d2f72660f092?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzE3MjV8MXwxfGFsbHwxfHx8fHx8Mnx8MTYyMTI4NzMzMw&ixlib=rb-1.2.1&q=80&w=1080", //is kaires puses yra lentynos pavadinimas/dezutes lentynoje pavadinimas, tuo pavadinimu kreipiames ir ieskom desinej pusej parasyta reiksme kazko.. 
+        //     "image2": "https://images.unsplash.com/photo-1621264872587-10025d13a1a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzE3MjV8MHwxfGFsbHwzfHx8fHx8Mnx8MTYyMTI4NzMzMw&ixlib=rb-1.2.1&q=80&w=1080", //antra lentyna, kurioje yra nuoroda du(reiksme), o tai gali buti bet kas, masyvas, elementas...
+        //     "image3": "https://images.unsplash.com/photo-1585399000684-d2f72660f092?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzE3MjV8MXwxfGFsbHwxfHx8fHx8Mnx8MTYyMTI4NzMzMw&ixlib=rb-1.2.1&q=80&w=1080", 
+        //     "image4": "https://images.unsplash.com/photo-1621264872587-10025d13a1a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzE3MjV8MHwxfGFsbHwzfHx8fHx8Mnx8MTYyMTI4NzMzMw&ixlib=rb-1.2.1&q=80&w=1080",
+            
+        //     "urls": [
+        //     "https://images.unsplash.com/photo-1585399000684-d2f72660f092?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzE3MjV8MXwxfGFsbHwxfHx8fHx8Mnx8MTYyMTI4NzMzMw&ixlib=rb-1.2.1&q=80&w=1080",
+        //     "https://images.unsplash.com/photo-1621264872587-10025d13a1a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzE3MjV8MHwxfGFsbHwzfHx8fHx8Mnx8MTYyMTI4NzMzMw&ixlib=rb-1.2.1&q=80&w=1080",
+        //     "https://images.unsplash.com/photo-1585399000684-d2f72660f092?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzE3MjV8MXwxfGFsbHwxfHx8fHx8Mnx8MTYyMTI4NzMzMw&ixlib=rb-1.2.1&q=80&w=1080", 
+        //     "https://images.unsplash.com/photo-1621264872587-10025d13a1a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzE3MjV8MHwxfGFsbHwzfHx8fHx8Mnx8MTYyMTI4NzMzMw&ixlib=rb-1.2.1&q=80&w=1080",
+        //     "https://images.unsplash.com/photo-1585399000684-d2f72660f092?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzE3MjV8MXwxfGFsbHwxfHx8fHx8Mnx8MTYyMTI4NzMzMw&ixlib=rb-1.2.1&q=80&w=1080",
+        
+        //     "https://images.unsplash.com/photo-1585399000684-d2f72660f092?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzE3MjV8MXwxfGFsbHwxfHx8fHx8Mnx8MTYyMTI4NzMzMw&ixlib=rb-1.2.1&q=80&w=1080",
+        //     "https://images.unsplash.com/photo-1621264872587-10025d13a1a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzE3MjV8MHwxfGFsbHwzfHx8fHx8Mnx8MTYyMTI4NzMzMw&ixlib=rb-1.2.1&q=80&w=1080",
+        //     "https://images.unsplash.com/photo-1585399000684-d2f72660f092?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzE3MjV8MXwxfGFsbHwxfHx8fHx8Mnx8MTYyMTI4NzMzMw&ixlib=rb-1.2.1&q=80&w=1080", 
+        //     "https://images.unsplash.com/photo-1621264872587-10025d13a1a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzE3MjV8MHwxfGFsbHwzfHx8fHx8Mnx8MTYyMTI4NzMzMw&ixlib=rb-1.2.1&q=80&w=1080",
+        //     "https://images.unsplash.com/photo-1585399000684-d2f72660f092?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzE3MjV8MXwxfGFsbHwxfHx8fHx8Mnx8MTYyMTI4NzMzMw&ixlib=rb-1.2.1&q=80&w=1080",
+        // ],
+       
+        // };
+
+       // var url;
+
+        // url = masyvas.urls[3]; //mes kreipiames i urls, nulinta numeri, kas yra pirmas paveikslelis, lauzt skliaustuose yra eiles numeris. 
+
+       // console.log(url); // sitie uzrasymai isveda nuoroda nurodyto paveikslelio, kuris pateiktas auksciau lauztiniuose skliaustuose, console puslapyje galima paspausti jeigu norim uzeiti ir atidaryti.
+
+    //     for(var i = 0; i < masyvas.urls.length; i++ ) { // nuolat pasikartojantis veiksmas; gal loop vadinamas. kad cikslas vyktu nuo pradzios iki nuorodu skaiciaus pabaigos; for ciklo struktura; apsibreziam tam tikra kintamaji; jis daznai buna i j pavadintas; kintamasis, kuris yra naudojamas cikle, uzfiksuoti zingsni, kol ciklas nepradejo vykti, jis lygus nuliui, tada po kabliataskio parasyta salyga iki kurios turi vykti ciklas; kol i bus maziau negu 5, kai jis tampa 5, ciklas sustoja. i++ reiskia viena ciklo rata pripliusuojam vienetuka prie kintamojo i;  po pirmo rato i=0, po antro rato i=1; po trecio rato i=2, taciau i=5 jau nebebus, nes ciklas sustoja ties i=4. 
+            
+    //    // console.log(masyvas.urls[i]);
+
+    //     var imageElement = document.createElement("img");
+    //     imageElement.src = masyvas.urls[i];
+    //     document.querySelector(".container").append(imageElement);
+
+        
+
+        // var imageElement = document.createElement("img");
+        // imageElement.src = masyvas.image1;
+        // document.querySelector(".container").append(imageElement);
+
+        // var imageElement1 = document.createElement("img");
+        // imageElement1.src = masyvas.image2;
+        // document.querySelector(".container").append(imageElement1);
+
+        // var imageElement2 = document.createElement("img");
+        // imageElement2.src = masyvas.image3;
+        // document.querySelector(".container").append(imageElement2);
+
+        // var imageElement3 = document.createElement("img");
+        // imageElement3.src = masyvas.image4;
+        // document.querySelector(".container").append(imageElement3);
+
+    // }
+
+// informacija = masyvas.image2;
+
+        // console.log(informacija);
+
+        // console.log(masyvas);
+
+
+        var iso;  //sitas kintamasis yra globalusis, nes aprasytas paciame virsuje ir yra matomas visur
+        var pages = 1;
+
+        loadImages(pages); 
+
+        function loadImages(page) {
+            fetch("https://api.unsplash.com/photos/?client_id=im3I34wqHmzdS5JDJKPJCw5RpZJC5OGrgTatN48pLHo&page=" + page) // page = nurodyta skaiciu galime ies
+            .then(res => res.json())
+            .then(data => { //data yra masyvas, kuriame yra visas tas sarasas, kuriame yra paveiksliuko objektai, is tu paveiksliuku objektu, urls yra nuorodos, kurios yra matomos ir pas mus console loge, urls dar savyje turi tam tikrus atrobutus, t.y. full, raw, regular..., ir mes dar patikslinom, kad mes pasiimam regular. su ciklu isnagrineje visa objektu sarasa, pasieme visus desimt elementu, sekmingai atvzaizdavome visus desimt paveiksliuku. 
+                for(var i = 0; i < data.length; i++ ) {
+                        // console.log(data[i].urls.regular);
+                        //pavadinimo atvzaizdavimas
+                        var pElement = document.createElement("p");
+                        pElement.classList.add("title");
+
+                        if(!data[i].alt_description) { //atvaizduoja teksta, kuris nurodytas zemiau paveikslelio, dar kitaip tariant console log yra prie paveikslelio urls/altdescription'as.
+                            pElement.innerText = "Aprasymas yra tuscias"
+                        } else {
+                            pElement.innerText = data[i].alt_description;
+                        }
+
+                        // susikuriame paveiksliuka
+                        var imageElement = document.createElement("img");
+                        imageElement.src = data[i].urls.regular;
+                        console.log(data[i].alt_description);
+
+                        //susikuriame div
+                        var divElement = document.createElement("div");
+                        divElement.classList.add("col-md-6");
+                        divElement.classList.add("grid-item"); //jeigu mes vuska prikabinam prie div elemento, tai reiskia, kad musus sitas elementas yra vaikinis elementas gridui, tai jis gali buti grid-item.
+                        
+                        //prie div prikabiname img ir p
+                        divElement.append(imageElement); //prie div elemento pridedam paveiksliuka. 
+                        divElement.append(pElement);
+
+                        //div prikabiname prie grid
+                        document.querySelector(".grid").append(divElement); //append reiskia prideti.
+                        //cia sukurtas ciklas, kad tiek kiek img tiek bus ir div'u. 
+
+                    
+                    }
+                    // apsibreziu kitnamaji, taip bandydamas susikonfiguruoti biblioteka, apibrezti.
+                        iso = new Isotope(".grid",{
+                        itemSelector: ".grid-item",
+                        stagger: 30,
+                        getSortData: { //pasiemem get sort data
+                            title: ".title" //apsirasem kad tai title
+                        },
+
+                        masonry: { //sitie zodziai is dokumentacijos; kaip isdelioti viska, koks turi buti dizainas, struktura, bloku isdeliojimas. 
+                            columnWidth: ".grid-sizer",
+                            gutter: ".grid-gutter-sizer"    
+                        }, 
+
+                        sortBy: "title", //pagal tai bandom rykiuoti
+                        sortAscending: true
+                    });
+            
+                    window.addEventListener("scroll", function(){
+                        // console.log(window.scrollY);
+                        // console.log(document.body.offsetHeight);
+                        // console.log(window.innerHeight); //vidinis aukstis, matomas laukas.
+                        // console.log(window.scrollY + window.innerHeight);
+                        var pozicija = window.scrollY + window.innerHeight;
+                        if(pozicija >= document.body.offsetHeight) {
+                            if(pages < 9) {
+                            console.log("puslapio pabaiga");
+                            pages++;
+                            console.log(pages);
+                            loadImages(pages);
+                       }
+                     }
+                    });
+                    
+
+
+                    var sortByGroup = document.querySelector(".sort-by-button-group"); //su sia funkcija pasiimam elementus is dizaino. 
+                    sortByGroup.addEventListener("click", function( event ){ //ivykio klausytojas, jis seka ir galvoja, kas atsitinka su sort by group div'u, seka paspaudimus, kai kazkas paspaudzia, jis turi atlikti skliausteliuose nurodyta funkcija.
+                    
+                        if(!matchesSelector(event.target, ".btn")) { // salygos sakinys. tik i mygtukus reaguojanti funkcija; salygoje parasem su sauktuku, o tai reiskia neigiamybe. 
+                            return; //jeigu sutinki ne mygtuka, reiskia turi stabdyti funkcija, nes turi veikti tik su mygtukais, o ne tekstiniais duomenimis. 
+                        }   //jeigu yra mygtukas, vykdoma apatine kodo dalis. jeigu tai ne mygtukas, o tekstas, kodas sustoja, ir toliau nebevykdo zemiau esancios dalies. 
+
+                        var sortValue = event.target.getAttribute("data-sort-value"); //event target reiskia mygtukas arba veiksmas, elementas ant kurio buvo atliktas veiksmas, veksmas ir jo atlikejas. 
+                        var sortDirection = event.target.getAttribute("data-sort-direction"); 
+                        var isAscending = (sortDirection == "asc");//paleidimo instrukcija; true;false; skliausteliuose apsirasom kintamaji, ir priskiriam sortDirection tokia kaip salve??
+                        
+                        iso.arrange({//arrange reiskia perdeliok
+                            sortBy: "sortValue",
+                            sortAscending: isAscending
+                        });     
+
+
+                        console.log(sortValue);
+                        console.log(sortDirection);
+                        console.log(isAscending);
+                    });
+                }  
+
+                
+            );
+
+        }
+
+        // fetch("https://api.unsplash.com/photos/?client_id=im3I34wqHmzdS5JDJKPJCw5RpZJC5OGrgTatN48pLHo&page=156") // page = nurodyta skaiciu galime ies
+        // .then(res => res.json())
+        // .then(data => { //data yra masyvas, kuriame yra visas tas sarasas, kuriame yra paveiksliuko objektai, is tu paveiksliuku objektu, urls yra nuorodos, kurios yra matomos ir pas mus console loge, urls dar savyje turi tam tikrus atrobutus, t.y. full, raw, regular..., ir mes dar patikslinom, kad mes pasiimam regular. su ciklu isnagrineje visa objektu sarasa, pasieme visus desimt elementu, sekmingai atvzaizdavome visus desimt paveiksliuku. 
+           
+
+        //        for(var i = 0; i < data.length; i++ ) {
+        //             // console.log(data[i].urls.regular);
+
+
+        //             //pavadinimo atvzaizdavimas
+        //             var pElement = document.createElement("p");
+        //             pElement.classList.add("title");
+
+        //             if(!data[i].alt_description) { //atvaizduoja teksta, kuris nurodytas zemiau paveikslelio, dar kitaip tariant console log yra prie paveikslelio urls/altdescription'as.
+        //                 pElement.innerText = "Aprasymas yra tuscias"
+        //             } else {
+        //                 pElement.innerText = data[i].alt_description;
+        //             }
+
+        //             // susikuriame paveiksliuka
+        //             var imageElement = document.createElement("img");
+        //             imageElement.src = data[i].urls.regular;
+        //              console.log(data[i].alt_description);
+
+        //             //susikuriame div
+        //             var divElement = document.createElement("div");
+        //             divElement.classList.add("col-md-6");
+        //             divElement.classList.add("grid-item"); //jeigu mes vuska prikabinam prie div elemento, tai reiskia, kad musus sitas elementas yra vaikinis elementas gridui, tai jis gali buti grid-item.
+                    
+        //             //prie div prikabiname img ir p
+        //             divElement.append(imageElement); //prie div elemento pridedam paveiksliuka. 
+        //             divElement.append(pElement);
+
+        //             //div prikabiname prie grid
+        //             document.querySelector(".grid").append(divElement); //append reiskia prideti.
+        //             //cia sukurtas ciklas, kad tiek kiek img tiek bus ir div'u. 
+
+                  
+        //         }
+        //         // apsibreziu kitnamaji, taip bandydamas susikonfiguruoti biblioteka, apibrezti.
+        //         var iso = new Isotope(".grid",{
+        //             itemSelector: ".grid-item",
+        //             stagger: 30,
+        //             getSortData: { //pasiemem get sort data
+        //                 title: ".title" //apsirasem kad tai title
+        //             },
+
+        //             masonry: { //sitie zodziai is dokumentacijos; kaip isdelioti viska, koks turi buti dizainas, struktura, bloku isdeliojimas. 
+        //                 columnWidth: ".grid-sizer",
+        //                 gutter: ".grid-gutter-sizer"    
+        //             }, 
+
+        //             sortBy: "title", //pagal tai bandom rykiuoti
+        //             sortAscending: true
+        //         });
+          
+
+                
+                
+
+
+        //         var sortByGroup = document.querySelector(".sort-by-button-group"); //su sia funkcija pasiimam elementus is dizaino. 
+        //         sortByGroup.addEventListener("click", function(event){ //ivykio klausytojas, jis seka ir galvoja, kas atsitinka su sort by group div'u, seka paspaudimus, kai kazkas paspaudzia, jis turi atlikti skliausteliuose nurodyta funkcija.
+                   
+        //             if(!matchesSelector(event.target, ".btn")) { // salygos sakinys. tik i mygtukus reaguojanti funkcija; salygoje parasem su sauktuku, o tai reiskia neigiamybe. 
+        //                 return; //jeigu sutinki ne mygtuka, reiskia turi stabdyti funkcija, nes turi veikti tik su mygtukais, o ne tekstiniais duomenimis. 
+        //             }   //jeigu yra mygtukas, vykdoma apatine kodo dalis. jeigu tai ne mygtukas, o tekstas, kodas sustoja, ir toliau nebevykdo zemiau esancios dalies. 
+
+        //             var sortValue = event.target.getAttribute("data-sort-value"); //event target reiskia mygtukas arba veiksmas, elementas ant kurio buvo atliktas veiksmas, veksmas ir jo atlikejas. 
+        //             var sortDirection = event.target.getAttribute("data-sort-direction"); 
+        //             var isAscending = (sortDirection == "asc");//paleidimo instrukcija; true;false; skliausteliuose apsirasom kintamaji, ir priskiriam sortDirection tokia kaip salve??
+                    
+        //             iso.arrange({//arrange reiskia perdeliok
+        //                 sortBy: "sortValue",
+        //                 sortAscending: isAscending
+        //             });     
+
+
+        //             console.log(sortValue);
+        //             console.log(sortDirection);
+        //             console.log(isAscending);
+        //         });
+        //     }  
+
+            
+        // );
+        
+        // fetch("https://api.unsplash.com/photos/?client_id=im3I34wqHmzdS5JDJKPJCw5RpZJC5OGrgTatN48pLHo&page=158") // page = nurodyta skaiciu galime ies
+        // .then(res => res.json())
+        // .then(data => { //data yra masyvas, kuriame yra visas tas sarasas, kuriame yra paveiksliuko objektai, is tu paveiksliuku objektu, urls yra nuorodos, kurios yra matomos ir pas mus console loge, urls dar savyje turi tam tikrus atrobutus, t.y. full, raw, regular..., ir mes dar patikslinom, kad mes pasiimam regular. su ciklu isnagrineje visa objektu sarasa, pasieme visus desimt elementu, sekmingai atvzaizdavome visus desimt paveiksliuku. 
+           
+
+        //        for(var i = 0; i < data.length; i++ ) {
+        //             // console.log(data[i].urls.regular);
+
+
+        //             //pavadinimo atvzaizdavimas
+        //             var pElement = document.createElement("p");
+        //             pElement.classList.add("title");
+
+        //             if(!data[i].alt_description) { //atvaizduoja teksta, kuris nurodytas zemiau paveikslelio, dar kitaip tariant console log yra prie paveikslelio urls/altdescription'as.
+        //                 pElement.innerText = "Aprasymas yra tuscias"
+        //             } else {
+        //                 pElement.innerText = data[i].alt_description;
+        //             }
+
+        //             // susikuriame paveiksliuka
+        //             var imageElement = document.createElement("img");
+        //             imageElement.src = data[i].urls.regular;
+        //              console.log(data[i].alt_description);
+
+        //             //susikuriame div
+        //             var divElement = document.createElement("div");
+        //             divElement.classList.add("col-md-6");
+        //             divElement.classList.add("grid-item"); //jeigu mes vuska prikabinam prie div elemento, tai reiskia, kad musus sitas elementas yra vaikinis elementas gridui, tai jis gali buti grid-item.
+                    
+        //             //prie div prikabiname img ir p
+        //             divElement.append(imageElement); //prie div elemento pridedam paveiksliuka. 
+        //             divElement.append(pElement);
+
+        //             //div prikabiname prie grid
+        //             document.querySelector(".grid").append(divElement); //append reiskia prideti.
+        //             //cia sukurtas ciklas, kad tiek kiek img tiek bus ir div'u. 
+
+                  
+        //         }
+        //         // apsibreziu kitnamaji, taip bandydamas susikonfiguruoti biblioteka, apibrezti.
+        //         var iso = new Isotope(".grid",{
+        //             itemSelector: ".grid-item",
+        //             stagger: 30,
+        //             getSortData: { //pasiemem get sort data
+        //                 title: ".title" //apsirasem kad tai title
+        //             },
+
+        //             masonry: { //sitie zodziai is dokumentacijos; kaip isdelioti viska, koks turi buti dizainas, struktura, bloku isdeliojimas. 
+        //                 columnWidth: ".grid-sizer",
+        //                 gutter: ".grid-gutter-sizer"    
+        //             }, 
+
+        //             sortBy: "title", //pagal tai bandom rykiuoti
+        //             sortAscending: true
+        //         });
+        //     }             
+        // );
+
+
+    </script>
+</body>
+</html> 

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexas, layoutas</title>
+
+<style>
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.flex-item-1 {
+    width: 100%;
+    background-color: silver;
+}
+
+.flex-item-2 {
+    width: 50%;
+    background-color: springgreen;
+}
+
+.flex-item-3 {
+    width: 50%;
+    background-color: rosybrown;
+}
+
+.flex-item-4 {
+    width: 70%;
+    background-color: silver;
+}
+
+.flex-item-5 {
+    width: 30%;
+    background-color: springgreen;
+}
+
+.flex-item-6 {
+    width: 33.3%;
+    background-color: rosybrown;
+}
+
+.flex-item-7 {
+    width: 33.3%;
+    background-color: rgb(172, 144, 144);
+}
+
+.flex-item-8 {
+    width: 33.3%;
+    background-color: rgb(100, 173, 137);
+}
+
+p {
+    color:black;
+    font-size: 28px;
+}
+
+[class*="flex-item"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kvadratelis {
+    width: 50px;
+    height: 50px;
+    background-color: darkblue;
+    padding: 10px; /*  vidine elemento paraste  */
+    margin: 10px;  /*  isorine elemento paraste, kuri atskiria viena nuo kito elemento  */
+}
+
+@media all and (max-width: 720px) { /* kreipimasis, kad ekranas
+kai bus mazinamas, atkreipti demesi i pakeitimus, kurie nurodyti zemiau,
+butent pasiekus 720 ir mazesni ekrano dydi */
+
+ .flex-container {
+     flex-flow: column wrap;
+    /* tas pats kas virsuj, tik kad jis isskaidytas i dvi eilutes. 
+    flex-wrap:wrap;
+     flex-direction:column; */
+ }
+ [class*="flex-item"]:not(.flex-item-4) {
+     width: 100%;
+ } /* kodas reiskia, kad kai mazinam ekrana iki 720 ir mazesnio, 
+ visos eilutes patampa 100proc ispildymu ekrane */
+
+ .flex-item-1 {
+order: 1;
+ } /*  kas reiskia, kad kai sumazinam ekrana, 
+ pirmas item nusikelia i apacia, taciau kai ekranas norm
+ dydzio, pirmas item lieka pirmu item, t.y. eilutes virsuje */
+
+}
+</style>
+
+
+</head>
+<body>
+    <div class="container">
+        <h1>Index flex pavyzdys</h1>
+        <div class="flex-container">
+            <div class="flex-item-1">
+                <div class="kvadratelis">
+                </div>
+                <div class="kvadratelis">
+                </div>
+                
+            </div>
+            <div class="flex-item-2"><p>2</p></div>
+            <div class="flex-item-3"><p>3</p></div>
+            <div class="flex-item-4"><p>4</p></div>
+            <div class="flex-item-5"><p>5</p></div>
+            <div class="flex-item-6"><p>6</p></div>
+            <div class="flex-item-7"><p>7</p></div>
+            <div class="flex-item-8"><p>8</p></div>
+        </div>
+    </div>
+</body>
+</html>

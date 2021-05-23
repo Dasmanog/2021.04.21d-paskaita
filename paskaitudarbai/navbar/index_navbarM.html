@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>puslapis su navigacija</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <style>
+
+        * {
+            box-sizing: border-box; /* kad kiekvieno elemento dydis skaiciuotusi su jo isorinem ir vidinem parastem */
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            max-width: 1920px;
+            margin: 0 auto;
+            font-family: Verdana, Arial, sans-serif;
+            line-height: 20px;
+            color: #3b3b3b;
+            background-color: #f1e2e2;
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        a {
+            text-decoration: none;
+            transition: all 0.5s ease; /* transiotionas kai uzvedam su pele ant teksto/nuorodos jis papilkeja, ar pakeicia spalva(bet tik uzvedus ant teksto) */
+        }
+
+        .area {
+            display: flex; /* lankstus atvaizdavimas, viska bando talpinti i viena eilute */
+            flex-flow: row wrap;
+            align-items: stretch; /* kad visi vaikiniai elementai isitemptu, kiek turi lasivos vietos */ 
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .navbar-component {
+            background-color: rgb(245, 244, 244);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.16), 0 2px 10px rgba(0,0,0,0.12);
+        }
+
+        .navbar-component > .navbar { /* selektorius <, nurodome, kad navbar vaikinis elementas navbar, t,y, is navbar elemento mes kreipemes i navbar */
+            justify-content: space-between; /* padaryti tarpa tarp elementu, ir tarp elementu, tiek kiek imanoma, siuo atveju tarp zodzio branding ir item'u*/
+        }
+
+        .navbar > .brand {
+            display: block;
+            font-size: 1rem;
+            color: #7e7979;
+            margin: 22px;
+        }
+
+        .navbar > .list > .item {
+            height: 64px;
+            line-height: 64px;
+            padding-left: 22px;
+            padding-right: 22px;
+            text-transform:uppercase;
+            color: #635d5d;
+            font-size: 0.875rem;
+        }
+
+        .navbar > .list > .item.-link {
+            line-height: 68px;
+            color: #635d5d;
+            border-bottom: 4px solid transparent; 
+            padding: 22px;
+        }
+
+        .navbar > .list > .item.-link:hover { /* hover ant telefono neveikia, todel norint kad veiktu ant telefono, reikia panaikinti */
+            color: chocolate; /* uzvedus ant nuorodos su pelyte pasikeicia teksto spalva, arba igaunamas atspalvis, bet vos tik patraukus pelyte, spalva grizta kokia buvo. */
+            border-bottom-color: rgb(151, 92, 206); /* uzvedus ant nuorodos su pelyte po apacia tekto uzsideda juostele su spalva, bet vos tik patraukus pelyte, spalva grizta kokia buvo. */
+        }
+        
+        .navbar > .toggle > .icon,
+        .navbar > .toggle > .icon:before,
+        .navbar > .toggle > .icon:after { /* su css sukurti pseudo elementai su before ir after, galima suformatuoti kas yra pries elementa ir po jo, bet tie pseudo techniskai neezistuoja. */
+            display:block;
+            width: 24px;
+            height: 3px;
+            background-color: #635d5d;
+            transition: background-color 0.3s linear, transform 0.3s linear; /* hamburgerio mygtukui uzdetas efektas, kai ji spustelim, pasiketimas ivyksta ne is karto, o po kurio laiko.  */
+        }
+
+        .navbar > .toggle > .icon:before, /* narsykle pati sukuria before after ir pati paslepia; dirbtinai priskirtos funkcijos ir parametrai, tarsi nurodant kad jie kazka turi ir kazka veikia */
+        .navbar > .toggle > .icon:after {
+            position: absolute;
+            content: ""; /* su tusciom kabutem norim apgauti narsykle, kad nurodyti, jog mes turim kontenta bet jis tuscias. */
+        }
+
+        .navbar > .toggle > .icon:before {
+            top: -8px;
+        }
+
+        .navbar > .toggle > .icon:after {
+            top: 8px;
+        }
+
+        .navbar > .toggle > .icon {
+            position: relative;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        .navbar > .toggle {
+             display: none; /* sita funkcija paslepia hamburger mygtuka  */
+            border: 0; /* nuima remeli nuo hamburger mygtuko.*/
+            background-color: transparent; /*permatoma spalva */
+            cursor: pointer; /*uzvedus ant hamburger elemento, pasikeicia kursorius i delno padeti (tarsi galetum kazka "paklikinti") */
+            padding: 22px; /* vidine paraste, atsitrauke is visu sonu */
+        }
+
+        .navbar > .toggle.active > .icon {
+            background-color: transparent; /* transparent reiskia permatomas. taip daroma, nes siekiam, kad kai spausim ant hamburgerio, vidurinis bruksniukas laikinai pradings */
+        } /* kodas yra vidurine hamburgerio dalis (visurinis bruksnelis) */
+
+        .navbar > .toggle.active > .icon:before {
+            transform: translateY(8px) rotate(45deg);   /* virsutini bruksniuka pakelti ir pasukti 45 laipsniais. */
+        } /* toggle mygtukas yra hamburgeris, su trim bruksniukais, kuris kai sumazinam meniu, visas turinys atsiduria butent toje vietoje */
+
+        .navbar > .toggle.active > .icon:after {
+            transform: translateY(-8px) rotate(-45deg); 
+        }
+
+
+        @media all and (max-width: 786px) {
+
+            .navbar-component {
+                position: absolute;/* parasius position absolute, butina nurodyti width, nes kitaip jis bus parenkamas savaime.   */
+                width: 100%;
+                
+            }
+           
+            .area {
+                flex-direction: column;
+            }
+
+            .navbar > .list {
+                display: none;
+                flex-direction: column;
+                flex-wrap: wrap;
+            }
+
+            .navbar > .list.active {
+                display: flex;
+            }
+
+            .navbar > .list > .item {
+                width: 100%;
+            }
+
+            .navbar > .toggle {
+                display:block;
+                position: absolute; /* position absolute ir right 0, padaro fiksuota hamburgerio mygtuka desinej pusej, net ir atsidarius meniu, x nebenuvaziuoja per viduri meniu, o lieka savo desiniajame virsuje kampe */ 
+                right: 0;
+            }
+        }
+
+
+        .kvadratelis { /* kvadratelis normaliomis salygomis, tik uzkrovus puslapi yra matomas, pasirinkus isjungimo funkcija, kvadratelio nematom.*/
+            display: none;
+                width: 200px;
+                height: 200px;
+                background-color: red;
+            }
+
+        .kvadratelis.aktyvus { /* ijungimo/isjungimo klase, per kuria valdom sias funkcijas.  */
+            display: block;
+        }
+
+    </style>
+
+</head>
+<body>
+   <div class="container">
+        <div class="navbar-component">
+            <div class="navbar area">
+
+                <a href="#" class="brand">Branding</a>
+
+                <nav id="navigation" class="list"> <!-- nav ir div jokio skirtumo kuri rasyti, ju pavadinimai tik del aiskumo.Kadangi dabar kuriam navbar(virsut lentele puslapio, toki kaip turini)-->
+                    <a href="#" class="item -link">home</a>
+                    <a href="#" class="item -link">articles</a>
+                    <a href="#" class="item -link">projects</a>
+                    <a href="#" class="item -link">resources</a>
+                    <a href="#" class="item -link">about me</a>
+                    <span class="item">
+                        <i class="fa fa-search"></i> <!-- (google ivedus fontawesome classes) i skirtas ikoneliu is bibliotekos(nurodytos) atvaizdavimuiirasyti reikia, kur class= pavadinima ikonos ir ji bus atvaizduota puslapyje.-->
+                    </span>
+                </nav>
+
+                <button id="hamburger" class="toggle"> <!-- mygtuko klase  yra toggle-->
+                    <span class="icon"></span>
+                </button>
+            </div>
+        </div>
+        <div class="main">
+            <span class="dinaminis">Tekstas</span>
+            <span class="dinaminis1"> 4</span>
+            <button onclick="on()" class="on">ijungti</button> <!--susikurem ijungti mygtuka; onclick reiskia paspaudimo metu; -->
+            <button onclick="off()" class="off">isjungti</button> <!-- susikurem isjungti mygtuka -->
+            <button class="onoff">Ijungti/Isjungti</button>
+
+            <div class="kvadratelis aktyvus"></div>
+        </div>
+   </div> 
+   <script>
+
+      console.log("Aukstis " + document.querySelector(".navbar-component").offsetHeight + "px");
+      var windowWidth = document.documentElement.clientWidth;
+    //   console.log("Ekrano plotis " + windowWidth + "px");
+
+
+    var windowWidth = document.documentElement.clientWidth;
+        if(windowWidth <= "786") {
+            console.log("ekranas mazesnis nei 786");
+            document.querySelector(".main").style.paddingTop = document.querySelector(".navbar-component").offsetHeight + "px";
+            // console.log("navbar komponento aukstis" + document.querySelector(".navbar-component").offsetHeight + "");
+            
+        } else {
+            document.querySelector(".main").style.paddingTop = 0;
+            
+        }
+
+      window.addEventListener("resize" , function() {
+        var windowWidth = document.documentElement.clientWidth;
+        if(windowWidth <= "786") {
+            // console.log("ekranas mazesnis nei 786");
+            document.querySelector(".main").style.paddingTop = document.querySelector(".navbar-component").offsetHeight + "px";
+            // console.log("navbar komponento aukstis" + document.querySelector(".navbar-component").offsetHeight + "");
+            
+        } else {
+            document.querySelector(".main").style.paddingTop = 0;
+
+        }
+        // console.log("Ekrano plotis " + windowWidth + "px");
+      })
+
+        document.querySelector(".onoff").onclick = function() {
+            document.querySelector(".kvadratelis").classList.toggle("aktyvus");
+        }   //mygtuko, kuris atlieka dvi funkcijas on ir off, aprasymas paciame skripte, jam priskirtas event (ivykis "onclick"), jam priskiriama funkcija. 
+
+
+
+        //Toggle(Hamburger) funkcija
+        document.querySelector(".toggle").onclick = function() {
+            this.classList.toggle("active");
+            document.querySelector(".list").classList.toggle("active"); // Sita eilute visa sarasa meniu leido atverti tik paspaudus nuoroda hamburger, nes iki tol meniu tarsi buvo uzsleptas, ir meniu iskart sumazinus vaizda, paspaudus ant nuorodos, atsidaro stulpeliu.
+        }
+
+        function on() { //mygtukui on priskyrem funkcija, kad ijungtu kvadrateli.
+            console.log("Ijungta");
+            document.querySelector(".kvadratelis").classList.add("aktyvus");
+        }
+
+        function off() { //mygtukui off priskyrem isjungimo funkcija, kad isjungtu kvadrateli.
+            console.log("Isjungta");
+            // console.log(document.querySelector(".kvadratelis").classList);
+            document.querySelector(".kvadratelis").classList.remove("aktyvus");
+        }
+
+        
+        var suma, sk1, sk2;  /* var reiskia kintamasis, ji reikia pavadinti kuo tikslingiau, sk1 yra skaicius vienas trumpinys. */       
+        suma = 0; /* patys priskiriam reiksmes kiekvienam kintamajam, veliau vyksta tik pateiktos formules rezultato pateikimas, pagal priskirtas reiksmes, kurios gali buti keiciamos.  */
+        sk1 = 8;
+        sk2 = 10;
+
+        suma = sk1 + sk2;
+
+        console.log(suma); /* reiskia konsoleje uzfiksuok suma, o konsole yra interneto puslapyje, paspaudus inspect ir tuomet console.*/
+        console.log("tekstas irasytas ranka");
+        console.log(document.querySelector(".dinaminis").innerText);
+        console.log(document.querySelector(".dinaminis1").innerText);
+
+        sk1 = document.querySelector(".dinaminis1").innerText; //4 turejom gauti pagal ideja? kadangi viskas eina is eiles, tai zemiau esantys pakeitimai, perraso auksciau esancius pakeitimus.
+        sk2 = 5;
+
+        var skirtumas;
+
+        skirtumas = sk2 - sk1;
+
+        console.log("skaicius is dizaino " + sk1); /* kai rasosi console.log tai reiskia kad atvaizduosim consoleje, tai is dizaino paimtas skaicius, jis suskaiciuotas pagal pateikta algoritma ir tuomet pateiktas console, o dar galimas variantas zemiau, atsakyma pateikti atgal i dizaina. */
+
+        console.log(skirtumas);
+
+       document.querySelector(".dinaminis").innerText = skirtumas; 
+       
+   </script>
+        
+
+
+
+</body>
+</html>

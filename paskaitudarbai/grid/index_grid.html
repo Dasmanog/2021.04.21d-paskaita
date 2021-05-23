@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+/* zvagzdute reiskia kad visi elementai */
+        * {
+  box-sizing: border-box;
+}
+/* dvylika stulpeliu,kiekvienas uzima po 8.33. rasom kiek uzima ploto stulpeliu kiekis.
+Tai vadinasi, aprasinejant pirmas stulpelio width bus 8.33, antras stulpelio width rasysis jau 16.66
+trecias 24.99 ir taip toliau. */
+.col-1 {
+    width: 8.33%;
+}
+
+.col-2 {
+    width: 16.66%;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-4 {
+    width: 33.33%;
+}
+
+.col-5 {
+    width: 41.66%;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-7 {
+    width: 58.33%;
+}
+
+.col-8 {
+    width: 66.66%;
+}
+
+.col-9 {
+    width: 75%;
+}
+
+.col-10 {
+    width: 83.33%;
+}
+
+.col-11 {
+    width: 91.66%;
+}
+
+.col-12 {
+    width: 100%;
+}
+
+/*  su snaigute zodis class reiskia, kad kreipiamasi i visus elementus, turincius 'col-' klase, 
+tai reiskia, kad gali buti tiek col-1, col-2, ir t.t. 
+ZODIS SOLID reiskia istisinis vienos splavos */
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+  box-shadow:
+    1px 0 0 0 red,
+    0 1px 0 0 red,
+    1px 1px 0 0 red inset,
+    0 1px 0 0 red inset;
+}
+ .none-border {
+    border: none;
+ }
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 none-border"></div>
+            <div class="col-6"></div>
+        </div>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4"></div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row">
+        <div class="col-2"></div>
+        <div class="col-5"></div>
+        <div class="col-3"></div>
+        <div class="col-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-9 none-border"></div>
+        <div class="col-3"></div>
+    </div>
+
+    <br>
+    <div class="row">
+        <div class="col-9">
+            <div class="row">
+                <div class="col-12">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur perferendis temporibus ut, quaerat amet ipsa quos dolorum est eligendi quibusdam veniam similique sed eveniet quia totam beatae aperiam eaque vero aliquam earum iste voluptatem? Temporibus inventore, eligendi quia aliquid quos praesentium deleniti officia exercitationem ab voluptas magnam facere sed, est neque numquam dolore soluta dolores cumque harum vitae ipsa tenetur? Lorem ipimus sit excepturi perspiciatis dolorum doloribus maxime recusandae sunt reiciendis quidem! Expedita quaerat soluta ipsa veritatis fuga animi beatae odio officia rem. Exercitationem itaque molestias repudiandae dolorum voluptate harum laudantium veritatis molestiae aperiam dolores maiores nobis quo nemo dolore adipisci voluptates eius sint, amet, doloremque, consequatur eum sit earum? Rerum, deserunt. Quas, accusamus a? Earum possimus vel pariatur recusandae porro eaque molestias debitis dolorem quidem odit voluptates, blanditiis placeat nisi quisquam fugiat aliquam, modi reiciendis? Numquam quisquam molestias neque impedit accusantium magni error assumenda consectetur laudantium, reprehenderit mi! Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur perferendis temporibus ut, quaerat amet ipsa quos dolorum est eligendi quibusdam veniam similique sed eveniet quia totam beatae aperiam eaque vero aliquam earum iste voluptatem? Temporibus inventore, eligendi quia aliquid quos praesentium deleniti officia exercitationem ab voluptas magnam facere sed, est neque numquam dolore soluta dolores cumque harum vitae ipsa tenetur? Lorem ipimus sit excepturi perspiciatis dolorum doloribus maxime recusandae sunt reiciendis quidem! Expedita quaerat soluta ipsa veritatis fuga animi beatae odio officia rem. Exercitationem itaque molestias repudiandae dolorum voluptate harum laudantium veritatis molestiae aperiam dolores maiores nobis quo nemo dolore adipisci voluptates eius sint, amet, doloremque, consequatur eum sit earum? Rerum, deserunt. Quas, accusamus a? Earum possimus vel pariatur recusandae porro eaque molestias debitis dolorem quidem odit voluptates, blanditiis placeat nisi quisquam fugiat aliquam, modi reiciendis? Numquam quisquam molestias neque impedit accusantium magni error assumenda consectetur laudantium, reprehenderit mi!</div>
+            </div>
+        </div>
+        <div class="col-3"></div>
+    </div>
+
+</div>
+</body>
+</html>
