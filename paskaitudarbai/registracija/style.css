@@ -1,0 +1,244 @@
+html {
+    height: 100%; /* kad ir kas benutiktu su dizainu, si eilute pasako, kad vistiek vaizdas isliktu 100% */
+}
+
+
+body {
+  max-width: 800px;
+  min-height: 100%;
+   margin: 0 auto;/* dizainas pasislenka is kampo i centra. */
+   position: relative;
+   background-color: #657AD3;
+} 
+
+.container {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.left-column, .right-column {
+ float:left;  /* sis kodas reiskia, kad jie slenka i kaire. */
+ height: 484px;
+}
+
+
+
+/* logino puslapio dizaino korekcija numeris vienas. kad dydis desinio kvadrato sumazetu ir prisitaikytu prie tokio, kokio mums reikia. taciau i sita koda sureagavo tik desine puse, o kairei reikejo rasyti papildomai eilutes.  */
+#login .left-column, #login .right-column {
+    height: 322px;
+    
+}
+
+/* logino puslapio dizaino korekcija numeris du. Dydis parenkamas pagaliau toks kokio reikia. t.y. kaires puses is 424px i 262px.  */
+#login .left-column-container {
+    height: 262px;
+}
+
+
+
+
+/* forgot puslapio dizaino korekcija numeris du. Dydis parenkamas pagaliau toks kokio reikia. t.y. kaires puses is 424px i 262px.  */
+#forgot .left-column, #forgot .right-column {
+    height: 241px;
+    
+}
+
+/* forgot puslapio dizaino korekcija numeris du. Dydis parenkamas pagaliau toks kokio reikia. t.y. kaires puses is 424px i 262px.  */
+#forgot .left-column-container {
+    height: 181px;
+}
+
+
+
+.right-column {
+   width: 60%;
+   background-color: #FFFFFF;
+   position: relative; 
+}
+
+.left-column {
+   width: 40%;
+   background-color: transparent; 
+}
+
+.left-column-container {
+   background-color:rgb(126, 152, 173);
+   display: block;
+   height: 424px;
+   margin-top: 30px;
+   background: transparent url('/09-registracija/img/mountain.png') 0% 0% no-repeat padding-box;
+   background-size: cover;/* paveiksliukas ikeltas i tinklapi, stengiasi uzdengti visa objekta (kvadrata i kuri buvo patalpintas) ir atitikti jo parametrus.  */
+   padding-left: 40px;
+   position: relative;
+}
+
+   
+
+
+.right-column-container {
+   padding-left: 60px;
+   padding-top: 46px;
+   padding-right: 60px;
+   padding-bottom: 46px;
+}
+
+h1 {
+   font: normal normal normal 32px/37px Gill Sans MT;
+   color: #FFFFFF;
+   margin: 0;
+   padding-top: 32px;
+}
+
+p, a {
+    display: inline-block;/* kad skirtingi elementai atsivaizduotu vienoj eilutej jeigu buvo pries tai skirtingose eilutese kaip atskiri elementai (tekstiniai, nuorodos).  */
+    font: normal normal normal 16px/19px Gill Sans MT;
+    color: #FFFFFF;
+    margin: 0 auto;
+}
+
+.links {
+   position: absolute;
+   bottom: 25px;
+}
+
+label {
+    display: block;
+    font: normal normal normal 13px/15px Gill Sans MT;
+    letter-spacing: 0px;
+    color: #000000;
+    padding-bottom: 12px;
+}
+
+.input { /*kreipimasis i klase */
+   margin-bottom: 33px;
+}
+
+input { /* kreipimasis i taga */
+    display: block;
+    border: none;
+    width: 100%;
+    padding-left: 0;
+    padding-bottom: 6px;
+    letter-spacing: 0px;
+    border-bottom: 1px solid #808080;
+}
+
+ input:focus { /* pazymejus teksta, nebera staciakampio formos pavidalo aplink isnasa (teksto laukeli) kai paspaudziam ant jo. nuimam ta efekta, remeli. */
+   border: none;
+   outline: none;
+   border-bottom: 1px solid #808080;
+}
+
+::-webkit-input-placeholder { /* formatuosim placeholderi */
+   font: normal normal normal 18px/21px Gill Sans MT;
+   color: #A9A9A9;
+}
+
+.btn {
+   font: normal normal normal 18px/21px Gill Sans MT;
+   letter-spacing: 0px;
+   color: #FFFFFF;
+   background-color: #FFC0CB;
+   border-radius: 19px;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   padding-left: 40px;
+   padding-right: 42px;
+   border: none;
+   box-shadow: 0 4px 8px darkgrey; /* padaro mygtuko seseli. */
+}
+
+
+   .btn:hover { /* hover padaro, kad atsirastu kursosius, uzdeti efekta sitoj sekcijoj galima,kuris atsirastu tik tuomet kai uzvestume ant mygtuko????  */
+       cursor: pointer;
+       box-shadow: 0 4px 8px rgb(122, 122, 122); /* uzvedus ant mygtuko jis pakeicia seselio spalva i tamsesne.  */
+   }
+
+   .close {
+       font: normal normal normal 30px/35px Gill Sans MT;
+       letter-spacing: 0px;
+       color: #000000;
+       position: absolute;
+       top: 14px;
+       right: 23px;
+   }
+
+   .close:hover {
+       color: #3b3b75;
+       cursor: pointer;
+   }
+
+   .link {
+       color: #00008B;
+       letter-spacing: 0px;
+       font: normal normal normal 18px/21px Gill Sans MT;
+       letter-spacing: 0px;
+       right: 152px;
+       text-decoration: none;
+   }
+
+   .link:hover {
+       color: #060614;
+       cursor: pointer;
+       text-decoration: underline;
+       font: normal normal normal 18px/21px Gill Sans MT;
+   }
+
+   .or {
+       color: #000000;
+       font: normal normal normal 18px/21px Gill Sans MT;
+       letter-spacing: 0px;
+       margin-left: 13px;
+       margin-right: 16px;
+   }
+
+
+    @media  screen and  (max-width: 664px) { /* max iki 368 gali mazeti ekranas, tad reikia tvarkyti iki sito dizaino, kad atrodytu padoriai. Mazesniu jau nebebuna.  */
+       .left-column-container {
+           padding-left: 20px;
+           
+       }
+
+       .right-column-container {
+           padding-left: 30px;
+           padding-right: 30px;
+       }
+
+       .right-column-bottom-action {
+           margin-top: 30px;
+           position: center;
+       }
+
+       .links {
+           bottom: 45px;
+       }
+
+       .or {
+           display: block;
+           text-align: center;
+       }
+
+       .link {
+           display:block;
+           text-align: center;
+       }
+
+       .btn {
+           font-size: 17;
+       }
+
+   }
+
+   @media (max-width:500px) and (min-width:368px) {  /* responsive dizainas gali kardinaliai skirtis nuo desktop standartinio varianto.  */
+       .right-column a {
+           padding-left: 0;
+           display: block;
+       }
+
+       .left-column, .right-column {
+           width: 100%;
+           display: block;
+       }
+   }
